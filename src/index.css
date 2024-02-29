@@ -1,0 +1,39 @@
+.btn{
+    display: flex;
+    justify-content: end;
+    padding:15px;
+}
+.ofcn{
+    padding:15px;
+    background: none;
+}
+.navlg{
+    background: none;
+}
+.btbg{
+    background: none;
+}
+.bn{
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+}
+.project{  
+    background-image: radial-gradient( circle 343px at 46.3% 47.5%,  rgba(242,242,242,1) 0%, rgba(241,241,241,1) 72.9% );  }
+.butn{
+    background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(0,107,141,1) 0%, rgba(0, 68, 91, 0.893) 90% );
+border: #20002c;
+padding: 10px;
+}
+.mincard{
+    z-index: 1;
+    background-image: radial-gradient( circle farthest-corner at -8.9% 51.2%,  rgba(255,124,0,1) 0%, rgba(255,124,0,1) 15.9%, rgba(255,163,77,1) 15.9%, rgba(255,163,77,1) 24.4%, rgba(19,30,37,1) 24.5%, rgba(19,30,37,1) 66% );
+}
+.bar{
+    background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(0,107,141,1) 0%, rgba(0, 68, 91, 0.893) 90% );
+
+}
+.log{
+    margin-top: -400px !important;
+    z-index: -1;
+}
