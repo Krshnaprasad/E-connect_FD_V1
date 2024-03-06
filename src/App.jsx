@@ -12,13 +12,11 @@ import Elearn from '../src/Elearn.jsx'
 import Profile from '../src/Profile.jsx'
 import HR from '../src/HR.jsx'
 import Punchlist from '../src/Punchlist.jsx'
-import Employees from '../src/Employees.jsx'
 import Request from '../src/Request.jsx'
 import Notification from '../src/Notification.jsx'
-
-
 import './App.css'
 import './index.css'
+import AdminPanel from '../src/AdminPanel.jsx';
 
 
 function App() {
@@ -36,9 +34,9 @@ function App() {
         <Route path ='/prof' element ={<Profile/>}/>
         <Route path ='/req' element ={<Request/>}/>
         <Route path ='/hr' element ={<HR/>}/>
-        <Route path ='/employ' element ={<Employees/>}/>
         <Route path ='/punch' element ={<Punchlist/>}/>
         <Route path ='/not' element={<Notification/>}/>
+        <Route path ='/admin' element={<AdminPanel/>}/>
       </Routes>
       </BrowserRouter>
      

@@ -33,10 +33,10 @@ return(
         </Navbar.Collapse>
       </Container>
     </Navbar>
-    <div className="container-fluid pt-3 pb-3">
+    <div className="container-fluid pt-4 pb-3">
       <ProfilePage/>
     </div>
-    <div className="container-fluid">
+    <div className="container-fluid pt-3 pb-3">
       <LandIcons/>
     </div>
     </div>

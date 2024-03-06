@@ -11,8 +11,8 @@ const [user]=[
 return(
 <>
 
-<div class="container d-flex justify-content-center">
-        <div class="card " style={{width:"30em"}}>
+<div class="container-fluid d-flex justify-content-center">
+        <div class="card " style={{width:"50em"}}>
   <div class="row g-0">
     <div class="col-md-4">
       <img src={user.img} class="img-fluid rounded-start" alt="..."></img>
