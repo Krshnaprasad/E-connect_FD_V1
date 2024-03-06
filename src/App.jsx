@@ -8,7 +8,15 @@ import Home from '../src/Home.jsx'
 import Register from '../src/Register.jsx'
 import Login from '../src/Login'
 import LandPage from '../src/LandPage.jsx'
-import ProfilePage from '../src/ProfilePage.jsx'
+import Elearn from '../src/Elearn.jsx'
+import Profile from '../src/Profile.jsx'
+import HR from '../src/HR.jsx'
+import Punchlist from '../src/Punchlist.jsx'
+import Employees from '../src/Employees.jsx'
+import Request from '../src/Request.jsx'
+import Notification from '../src/Notification.jsx'
+
+
 import './App.css'
 import './index.css'
 
@@ -24,7 +32,13 @@ function App() {
         <Route path='/reg' element={<Register/>}/>
         <Route path='/log' element={<Login/>}/>
         <Route path ='/land' element ={<LandPage/>}/>
-        <Route path ='/prof' element ={<ProfilePage/>}/>
+        <Route path ='/elearn' element ={<Elearn/>}/>
+        <Route path ='/prof' element ={<Profile/>}/>
+        <Route path ='/req' element ={<Request/>}/>
+        <Route path ='/hr' element ={<HR/>}/>
+        <Route path ='/employ' element ={<Employees/>}/>
+        <Route path ='/punch' element ={<Punchlist/>}/>
+        <Route path ='/not' element={<Notification/>}/>
       </Routes>
       </BrowserRouter>
      

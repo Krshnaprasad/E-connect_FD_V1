@@ -1,9 +1,8 @@
 import React, {useState} from'react'
-import {Link} from "react-router-dom"
-
+import {useNavigate} from "react-router-dom"
 
 const Register = () => {
-
+    const navigate = useNavigate();
     const [User, setUserData]= useState({
    
     
@@ -25,7 +24,7 @@ const Register = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault()
-   
+        navigate("/log")
         const UserData={
             
             name:User.name,
@@ -43,13 +42,18 @@ const Register = () => {
         })
         .then((res) =>{
                 console.log(res);
-        }) 
+        })
+        .then((data)=>{
+            console.log(data);
+            let user = localStorage.setItem("username",data.name);
+            console.log(data.name);
+        })
     console.log(UserData);
     
     }
 return(
  
-    <div class="container-fluid"> 
+    <div class="container-fluid pt-2 pb-2"> 
     <div class="container">
         <div className="row justify-content-center align-content-center">
         <form class="card mincard p-5 text-white" style={{width:"23em"}}>
@@ -65,7 +69,7 @@ return(
         <label class="fnt">Confirm Password:</label>
         <input name="confirmpassword" type="password" placeholder="Confirm password"  value={User.value} onChange={handleChange}></input><br></br>
         
-        <button class="butn text-white fw-semibold" onClick={handleSubmit}>Submit</button>
+        <button class="butn text-white fs-5 fw-semibold" onClick={handleSubmit}>Submit</button>
        
         </form>
         </div>

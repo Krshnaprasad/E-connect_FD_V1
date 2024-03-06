@@ -41,7 +41,7 @@ const Login = () => {
             }
             else {
                 return response.json(),
-             navigate("/Home")
+             navigate("/land")
             }
             
             
@@ -61,7 +61,8 @@ const Login = () => {
     }
 
  return(  
-                <div class="container-fluid" style={{height:"3em"}}> 
+    <>
+    <div class="container-fluid pt-2 pb-2" style={{height:"3em"}}> 
                     <div class="container">
                         <div className="row pt-5 justify-content-center">
                         <form class="card mincard p-5 text-white" style={{width:"20em"}} onSubmit={handleSubmit}>
@@ -76,11 +77,12 @@ const Login = () => {
                         <input value={User.value} class="form-check-input" name="check" type="checkbox" role="switch" onChange={handleChange}></input><label class="txt" for="flexSwitchCheckChecked">Remember me</label><br></br><br></br>
                         
                         </div>
-                        <button class="butn text-white fw-semibold">Submit</button>
+                        <button class="butn text-white fs-5 fw-semibold">Submit</button>
                         </form>
                     </div>
                     </div>
                 </div>
+              </>
  )
 }
 
