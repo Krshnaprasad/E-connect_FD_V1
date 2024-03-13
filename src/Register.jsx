@@ -8,9 +8,9 @@ const Register = () => {
     
     name:'',
     email: '',
+    designation:'',
     phoneno:'',
     password:'',
-    confirmpassword:''
 
     })
     
@@ -24,14 +24,14 @@ const Register = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault()
-        navigate("/log")
+       
         const UserData={
             
             name:User.name,
             email:User.email,
+            designation:User.designation,
             phoneno:User.phoneno,
             password:User.password,
-            confirmpassword:User.confirmpassword
 
         }
         fetch("http://localhost:8080/user/set",{
@@ -42,18 +42,17 @@ const Register = () => {
         })
         .then((res) =>{
                 console.log(res);
+                navigate("/land")
         })
         .then((data)=>{
-            console.log(data);
-            let user = localStorage.setItem("username",data.name);
-            console.log(data.name);
+            
         })
     console.log(UserData);
     
     }
 return(
  
-    <div class="container-fluid pt-2 pb-2"> 
+    <div class="container-fluid pt-3 pb-3"> 
     <div class="container">
         <div className="row justify-content-center align-content-center">
         <form class="card mincard p-5 text-white" style={{width:"23em"}}>
@@ -62,13 +61,13 @@ return(
         <input name="name"  type="text" placeholder="Name" value={User.value} onChange={handleChange}></input>
         <label class="fnt">Email:</label>
         <input name="email"  type="text" placeholder="Email"  value={User.value} onChange={handleChange}></input>
+        <label class="fnt">Designation:</label>
+        <input name="designation"  type="text" placeholder="Designation"  value={User.value} onChange={handleChange}></input>
         <label class="fnt">Mobile No:</label>
         <input name="phoneno"  type="number" placeholder="Mobile no" value={User.value} onChange={handleChange}></input>
         <label class="fnt">Password:</label>
         <input name="password"  type="password" placeholder="Password"  value={User.value} onChange={handleChange}></input>
-        <label class="fnt">Confirm Password:</label>
-        <input name="confirmpassword" type="password" placeholder="Confirm password"  value={User.value} onChange={handleChange}></input><br></br>
-        
+        <br></br>        
         <button class="butn text-white fs-5 fw-semibold" onClick={handleSubmit}>Submit</button>
        
         </form>

@@ -19,6 +19,7 @@ import './index.css'
 import AdminPanel from '../src/AdminPanel.jsx';
 
 
+
 function App() {
   return (
     <>
@@ -37,6 +38,7 @@ function App() {
         <Route path ='/punch' element ={<Punchlist/>}/>
         <Route path ='/not' element={<Notification/>}/>
         <Route path ='/admin' element={<AdminPanel/>}/>
+    
       </Routes>
       </BrowserRouter>
      

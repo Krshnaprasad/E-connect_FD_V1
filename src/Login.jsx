@@ -6,7 +6,7 @@ const Login = () => {
     const navigate = useNavigate();
 
     const [User, setUserData]= useState({   
-    email: '',
+    name: '',
     password:'',
     check:''
     })
@@ -24,8 +24,8 @@ const Login = () => {
         const userData={
             
            
-            email:User.email,
-           check:User.check,
+            name:User.name,
+            check:User.check,
             password:User.password,
            
 
@@ -40,35 +40,27 @@ const Login = () => {
                 throw new error("Failed to Fetch data");
             }
             else {
+                console.log(response);
                 return response.json(),
-             navigate("/land")
-            }
-            
-            
+                navigate("/land")
+            }  
         }) 
         .then((data)=>{
-            if(data == !User.email && data == !User.password ){
-            alert("Enter valid details")
-            }
             console.log(data);
-            setUserData(data);
+            let user = localStorage.setItem("name",data.name);
+            console.log(data.name);
         })
-        .catch((error)=>{
-            console.error("Error during fetch",error);
-        })
-    
-    
     }
 
  return(  
     <>
-    <div class="container-fluid pt-2 pb-2" style={{height:"3em"}}> 
+    <div class="container-fluid pt-3 pb-3" style={{height:"3em"}}> 
                     <div class="container">
                         <div className="row pt-5 justify-content-center">
                         <form class="card mincard p-5 text-white" style={{width:"20em"}} onSubmit={handleSubmit}>
                         <h1 class="txt fs-2 fw-bold text-center">Login</h1>
-                        <label class="fnt">Email:</label>
-                        <input type="text" name="email" placeholder="Email" value={User.value} onChange={handleChange}></input><br></br>
+                        <label class="fnt">Name:</label>
+                        <input type="text" name="name" placeholder="name" value={User.value} onChange={handleChange}></input><br></br>
                        
                         <label class="fnt">Password:</label>
                         <input type="password" name="password" placeholder="Password" value={User.value} onChange={handleChange}></input><br></br>
