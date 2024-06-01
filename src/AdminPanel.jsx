@@ -1,17 +1,21 @@
-import React, { useEffect, useState } from 'react'
+import{ useEffect, useState } from 'react'
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
-import Form from 'react-bootstrap/Form';
+
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
 const AdminPanel = () => {
-  const [activeStep, setActiveStep] = useState(1);
-  const [Employees, setEmployee] = useState([])
-  const [User, setUserData]= useState({
+ 
+  
+  
+// --EMPLOYEE UPDATE---------------------------------
+const [Employees, setEmployee] = useState([])
+
+const [User, setUserData]= useState({
    
-    id:'',
+    userid:'',
     name:'',
     email: '',
     designation:'',
@@ -20,7 +24,7 @@ const AdminPanel = () => {
 
     })
     
-    const handleChangeupd = (event) => {
+const handleChangeupd = (event) => {
         const{name, value} = event.target;
         setUserData({...User, [name]:value})
         console.log(name,value);
@@ -28,12 +32,12 @@ const AdminPanel = () => {
     
     }
 
-    const handleUpdate = (event) => {
+const handleUpdate = (event) => {
         event.preventDefault()
        
         const UserData={
             
-            id:User.id,
+            userid:User.userid,
             name:User.name,
             email:User.email,
             designation:User.designation,
@@ -41,7 +45,7 @@ const AdminPanel = () => {
             password:User.password,
 
         }
-        fetch(`http://localhost:8080/user/update/${User.id}`,{
+        fetch(`http://localhost:6060/user/update/${User.id}`,{
             method:"post",
             headers: {'Content-Type':'application/json'},
             body: JSON.stringify(UserData),
@@ -50,17 +54,57 @@ const AdminPanel = () => {
         .then((res) =>{
                 console.log(res);
         })
-        .then((data)=>{
-            
+        .then((err) => {
+          console.log(err);
         })
     console.log(UserData);
     }
+
+// ------EMPLOYEE DELETE ----------------------------    
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+  
+    const handleDelete = (i) => {
+      fetch(`http://localhost:6060/user/delete/${i}`, {
+        method: "get"
+      },
+        Employees.splice(i, 1)
+      )
+    }
+  
+    useEffect(() => {
+      fetch("http://localhost:6060/user/get"
+      ).then(response => response.json())
+        .then(data => {
+  
+          console.log(data);
+          setEmployee(data);
+  
+        })
+  
+    }, [])
+// --------ADD EMPLOYEE TABLE -----------------------------------
+  const [activeStep, setActiveStep] = useState(1);
   const [staff, setStaffData] = useState({
     name: '',
     email: '',
     designation: '',
     phoneno: '',
     password: '',
+    address:'',
+    city:'',
+    state:'',
+    location:'',
+    pincode:'',
+    bank:'',
+    accountno:'',
+    ifsc:'',
+    pf:'',
+    esi:'',
+    branch:''
+
   })
 
 
@@ -72,26 +116,7 @@ const handleChange = (event) => {
 const handleNext1 = (event) => {
     setActiveStep((prevStep) => prevStep + 1);
     event.preventDefault()
-    const staffData = {
-      name:staff.name,
-      email:staff.email,
-      designation:staff.designation,
-      phoneno:staff.phoneno,
-      password:staff.password,
-    }
-    fetch("http://localhost:8080/user/set", {
-      method: "post",
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(staffData),
-
-    })
-      .then((res) => {
-        console.log(res);
-      })
-      .then((data) => {
-        console.log(data);
-      })
-    console.log(staffData);
+   
   };
   const handleNext2 = () => {
     setActiveStep((prevStep) => prevStep + 1);
@@ -104,33 +129,45 @@ const handleNext1 = (event) => {
     setActiveStep((prevStep) => prevStep - 1);
   };
 
- 
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
-  const handleDelete = (i) => {
-    fetch(`http://localhost:8080/user/delete/${i}`, {
-      method: "get"
-    },
-      Employees.splice(i, 1)
-    )
-  }
-
-  useEffect(() => {
-    fetch("http://localhost:8080/user/get"
-    ).then(response => response.json())
-      .then(data => {
-
-        console.log(data);
-        setEmployee(data);
-
-      })
-
-  }, [])
+  const submit = () => {
+    const staffData = {
+      name:staff.name,
+      email:staff.email,
+      designation:staff.designation,
+      phoneno:staff.phoneno,
+      password:staff.password,
+      address:{
+        address:staff.address,
+        location:staff.location,
+        city:staff.city,
+        state:staff.state,
+        pincode:staff.pincode,
+      },
+      bank:{
+        bank:staff.bank,
+        ifsccode:staff.ifsccode,
+        pf:staff.pf,
+        esi:staff.esi,
+        branch:staff.branch,
+        accountno:staff.accountno
+      }
+    }
+    fetch("http://localhost:6060/user/set", {
+      method: "post",
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(staffData),
   
-const Step1 = () => {
+    })
+      .then((res) => {
+        console.log(res);
+      })
+      .then((data) => {
+        console.log(data);
+      })
+    console.log(staffData);
+   }  
+
+   const Step1 = () => {
     return <div className="row">
         <div className="col">
           <label>Name: </label> <br></br>
@@ -161,11 +198,11 @@ const Step1 = () => {
           <label>Pincode: </label><br></br>
         </div>
         <div className="col">
-          <input type="text" name="address" value={user.address} onChange={handleChange}></input>
-          <input type="text" name="location" value={user.location} onChange={handleChange}></input>
-          <input type="text" name="city" value={user.city} onChange={handleChange}></input>
-          <input type="text" name="state" value={user.state} onChange={handleChange}></input>
-          <input type="text" name="pincode" value={user.pincode} onChange={handleChange}></input>
+          <input type="text" name="address" value={staff.address} onChange={handleChange}></input>
+          <input type="text" name="location" value={staff.location} onChange={handleChange}></input>
+          <input type="text" name="city" value={staff.city} onChange={handleChange}></input>
+          <input type="text" name="state" value={staff.state} onChange={handleChange}></input>
+          <input type="text" name="pincode" value={staff.pincode} onChange={handleChange}></input>
         </div>
         <div className='text-center pt-5'><button onClick={handleBack2} className='bg-primary text-white border-0 pe-3 p-1 ps-3'>Back</button>&nbsp;&nbsp;
         <button onClick={handleNext2} className='bg-primary text-white border-0 pe-3 p-1 ps-3'>Continue</button></div>
@@ -184,21 +221,144 @@ const Step1 = () => {
             <label>ESI:</label>
         </div>
         <div className="col">
-              <input type="text" name="bank" value={user.bank} onChange={handleChange}></input>
-            <input type="text" name="accountno" value={user.accountno} onChange={handleChange}></input> 
-            <input type="text" name="ifsc" value={user.ifsc} onChange={handleChange}></input> 
-            <input type="text" name="branch" value={user.branch} onChange={handleChange}></input> 
-            <input type="text" name="pf" value={user.pf} onChange={handleChange}></input> 
-          <input type="text" name="esi" value={user.esi} onChange={handleChange}></input> 
+              <input type="text" name="bank" value={staff.bank} onChange={handleChange}></input>
+            <input type="text" name="accountno" value={staff.accountno} onChange={handleChange}></input> 
+            <input type="text" name="ifsccode" value={staff.ifsccode} onChange={handleChange}></input> 
+            <input type="text" name="branch" value={staff.branch} onChange={handleChange}></input> 
+            <input type="text" name="pf" value={staff.pf} onChange={handleChange}></input> 
+          <input type="text" name="esi" value={staff.esi} onChange={handleChange}></input> 
         </div>
         <div className='text-center pt-5'>
         <button onClick={handleBack1} className='bg-primary text-white border-0 pe-3 p-1 ps-3'>Back</button>&nbsp;&nbsp;
-        <button className='bg-primary text-white border-0 pe-3 p-1 ps-3'>Submit</button></div>
+        <button className='bg-primary text-white border-0 pe-3 p-1 ps-3' onClick={submit}>Submit</button></div>
+      </div>
+     
+    </div>;
+  };   
+// ------------------ATTENDANCE/CTC------------------------------------------------------
+const[attendctc, setAttendData] = useState({
+  workingdays:'',
+  holidays:'',
+  present:'',
+  cl_sl:'',
+  lop:'',
+  month_salary:'',
+    ctc:'',
+    basic_salary:'',
+    ta:'',
+    fa:'',
+    pf:'',
+    esi:'',
+    overall_salary:''
+
+ 
+
+
+})
+
+const handletabChange = (event) => {
+  const{name, value} = event.target;
+  setAttendData({...attendctc, [name]:value})
+  console.log(name,value);
+}
+const [tabStep, setTabStep] = useState(1);
+  const handleNext3 = () => {
+    setTabStep((prevStep) => prevStep + 1);
+  };
+  const handleBack3 = () => {
+    setTabStep((prevStep) => prevStep - 1);
+  };
+
+  const Step4 = () => {
+    return <div>
+      <div className="row">
+      <div className="col" style={{lineHeight:"27px"}}>
+                  <label>No of Working days: </label><br></br>
+                  <label>No of Holidays: </label><br></br>
+                  <label>No of Present: </label><br></br>
+                  <label>No of CL/SL: </label><br></br>
+                  <label>No of LOPs: </label><br></br>
+                  <label>Overall Salary:</label>
+                </div>
+        <div className="col">
+                  <input type="text" name="workingdays" value={attendctc.workingdays} onChange={handletabChange}></input>
+                  <input type="text" name="holidays" value={attendctc.holidays} onChange={handletabChange}></input>
+                  <input type="text" name="present" value={attendctc.present} onChange={handletabChange}></input>
+                  <input type="text" name="cl_sl" value={attendctc.cl_sl} onChange={handletabChange}></input>
+                  <input type="text" name="lop" value={attendctc.lop} onChange={handletabChange}></input>
+                  <input type="text" name="month_salary" value={attendctc.month_salary} onChange={handletabChange}></input>
+        </div>
+        <div className='text-center'>
+        <div className='text-center pt-5'><button onClick={handleNext3} className='bg-primary text-white border-0 pe-3 p-1 ps-3'>Continue</button>&nbsp;&nbsp;
+      </div>
+    </div>;
+    </div>
+    </div>
+  };
+
+  const Step5 = () => {
+    return <div>
+      <div className="row">
+        <div className="col" style={{lineHeight:"28px"}}>
+                  <label>CTC:</label><br></br>
+                  <label>Basic Salary: </label><br></br>
+                  <label>Travel Allowance: </label><br></br>
+                  <label>Food Allowance: </label><br></br>
+                  <label>PF: </label><br></br>
+                  <label>ESI: </label><br></br>
+                  <label>Overall Salary: </label>
+        </div>
+        <div className="col">
+                  <input type="text" name="ctc" value={attendctc.ctc} onChange={handletabChange}></input>
+                  <input type="text" name="basic_salary" value={attendctc.basic_salary} onChange={handletabChange}></input>
+                  <input type="text" name="ta" value={attendctc.ta} onChange={handletabChange}></input>
+                  <input type="text" name="fa" value={attendctc.fa} onChange={handletabChange}></input>
+                  <input type="text" name="pf" value={attendctc.pf} onChange={handletabChange}></input>
+                  <input type="text" name="esi" value={attendctc.esi} onChange={handletabChange}></input>
+                  <input type="text" name="overall_salary" value={attendctc.overall_salary} onChange={handletabChange}></input>
+        </div>
+        <div className='text-center pt-5'>
+        <button onClick={handleBack3} className='bg-primary text-white border-0 pe-3 p-1 ps-3'>Back</button>&nbsp;&nbsp;
+        <button className='bg-primary text-white border-0 pe-3 p-1 ps-3' onClick={sub}>Submit</button></div>
       </div>
      
     </div>;
   };
 
+  const sub = () => {
+    const attendData = {
+     workingdays:attendctc.workingdays,
+     holidays:attendctc.holidays,
+     present:attendctc.present,
+     cl_sl:attendctc.cl_sl,
+     lop:attendctc.lop,
+     month_salary:attendctc.month_salary,
+     salary:{
+      ctc:attendctc.ctc,
+      basic_salary:attendctc.basic_salary,
+      ta:attendctc.ta,
+      fa:attendctc.fa,
+      pf:attendctc.pf,
+      esi:attendctc.esi,
+      overall_salary:attendctc.overall_salary
+     }
+     
+    }
+    fetch("http://localhost:6060/attend/set", {
+      method: "post",
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(attendData),
+  
+    })
+      .then((res) => {
+        console.log(res);
+      })
+      .then((data) => {
+        console.log(data);
+      })
+    console.log(attendData);
+   }  
+// ----------JOB OPENINGS ----------------------------------  
   const[job,setjobData] = useState({
     manager:'',
     team_lead:'',
@@ -229,7 +389,7 @@ const Step1 = () => {
       training_tutors:job.training_tutors
 
     }
-    fetch("http://localhost:8080/job/set", {
+    fetch("http://localhost:6060/job/set", {
       method: "post",
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(jobData),
@@ -244,7 +404,7 @@ const Step1 = () => {
     console.log(jobData);
   };
   
-// #code---------------------------------------------------------->
+//---------ACTUAL CODE---------------------------------------------------------->
   return (
     <>
       <div className="container-fluid pt-5">
@@ -270,69 +430,71 @@ const Step1 = () => {
                       <th>ID</th>
                       <th>Name</th>
                       <th>Email</th>
+                      <th>Designation</th>
                       <th>Mobile No</th>
                       <th>Password</th>
                       <th>Edit/Delete</th>
                     </tr>
                   </thead>
-                  {Array.isArray(Employees) && Employees.map(employ => (<tbody>
-                    <tr>
-                      <td>{employ.userid}</td>
-                      <td>{employ.name}</td>
-                      <td>{employ.email}</td>
-                      <td>{employ.phoneno}</td>
-                      <td>{employ.password}</td>
-                      <td className='text-center'>
-                        <button className='border-0' onClick={handleShow}>
-                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
-                            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
-                            <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
-                          </svg>
-                        </button>&nbsp;
-                        <Modal show={show} onHide={handleClose}>
-                          <Modal.Header closeButton>
-                            <Modal.Title>Basic Details</Modal.Title>
-                          </Modal.Header>
-                          <Modal.Body>
-                          <div className="row justify-content-center">
-                            <div className="col">
-                              <label>Id:</label><br></br>
-                              <label>Name: </label> <br></br>
-                              <label>Email: </label> <br></br>
-                              <label>Mobile: </label> <br></br>
-                              <label>Designation: </label>  <br></br>
-                              <label>Password:</label>
-                            </div>
-                            <div className="col">
-                            <input type="text" name="id" value={User.id} onChange={handleChangeupd}></input>
+                  {Array.isArray(Employees) && Employees.map((employ) => (
+  <tbody key={employ.id}>
+    <tr>
+      <td>{employ.id}</td>
+      <td>{employ.name}</td>
+      <td>{employ.email}</td>
+      <td>{employ.designation}</td>
+      <td>{employ.phoneno}</td>
+      <td>{employ.password}</td>
+      <td className='text-center'>
+        <button className='border-0' onClick={handleShow}>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-pencil-square" viewBox="0 0 16 16">
+            <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+            <path fillRule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
+          </svg>
+        </button>&nbsp;
+        <Modal show={show} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Basic Details</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <div className="row justify-content-center">
+              <div className="col">
+                <label>Id:</label><br />
+                <label>Name: </label><br />
+                <label>Email: </label><br />
+                <label>Mobile: </label><br />
+                <label>Designation: </label><br />
+                <label>Password:</label>
+              </div>
+              <div className="col">
+                <input type="text" name="userid" value={User.userid} onChange={handleChangeupd} />
+                <input type="text" name="name" value={User.name} onChange={handleChangeupd} />
+                <input type="text" name="email" value={User.email} onChange={handleChangeupd} />
+                <input type="text" name="phoneno" value={User.phoneno} onChange={handleChangeupd} />
+                <input type="text" name="designation" value={User.designation} onChange={handleChangeupd} />
+                <input type="text" name="password" value={User.password} onChange={handleChangeupd} />
+              </div>
+            </div>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+              Close
+            </Button>
+            <Button variant="primary" onClick={handleUpdate}>
+              Save Changes
+            </Button>
+          </Modal.Footer>
+        </Modal>
+        <button className='border-0' onClick={() => handleDelete(employ.id)}>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-trash-fill" viewBox="0 0 16 16">
+            <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0" />
+          </svg>
+        </button> &nbsp;
+      </td>
+    </tr>
+  </tbody>
+))}
 
-                              <input type="text" name="name" value={User.name} onChange={handleChangeupd}></input>
-                              <input type="text" name="email" value={User.email} onChange={handleChangeupd}></input>
-                              <input type="text" name="phoneno" value={User.phoneno} onChange={handleChangeupd}></input>
-                              <input type="text" name="designation" value={User.designation} onChange={handleChangeupd}></input>
-                              <input type="text" name="password" value={User.password} onChange={handleChangeupd}></input>
-                            </div>
-                            </div>
-                            </Modal.Body>
-                          <Modal.Footer>
-                            <Button variant="secondary" onClick={handleClose}>
-                              Close
-                            </Button>
-                            <Button variant="primary" onClick={handleUpdate}>
-                              Save Changes
-                            </Button>
-                          </Modal.Footer>
-                        </Modal>
-                        <button className='border-0' onClick={() => handleDelete(employ.userid)}>
-                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
-                            <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0" />
-                          </svg>
-                        </button> &nbsp;
-                        {/* <button className=''>Submit</button> */}
-                      </td>
-                    </tr>
-                  </tbody>
-                  ))}
                 </Table>
               </div>
             </Tab>
@@ -350,28 +512,12 @@ const Step1 = () => {
             </div>
             </Tab>
             <Tab eventKey="ctc" title="ATTENDANCE/SALARY DETAILS">
-              <div className="row justify-content-center pt-5">
-                <p className='text-center fs-4 fw-bold'>Month: March</p>
-                <div className="col-md-2 d-grid">
-                  <label>No of Working days: </label>
-                  <label>No of Holidays: </label>
-                  <label>No of Present: </label>
-                  <label>No of CL/SL: </label>
-                  <label>No of LOP's: </label>
-                  <label>Overall Salary:</label>
+              <div className="row justify-content-center pt-3">
+              <p className='text-center fs-4 fw-bold'>Month: March</p>
+                <div className="col-md-4 d-grid justify-content-center">
+                {tabStep === 1 && <Step4 />}
+                {tabStep === 2 && <Step5/>}
                 </div>
-                <div className="col-md-2 d-grid">
-                  <input type="text"></input>
-                  <input type="text"></input>
-                  <input type="text"></input>
-                  <input type="text"></input>
-                  <input type="text"></input>
-                </div>
-              </div>
-              <div className="row text-center pt-3">
-                <Form>
-                  &nbsp;<button style={{ width: "9em" }} className="bg-primary p-1 text-white border-0">Submit</button>
-                </Form>
               </div>
             </Tab>
             <Tab eventKey="vaccant" title="JOB OPENINGS">
@@ -398,34 +544,6 @@ const Step1 = () => {
                 <button style={{ width: "9em" }} className="bg-primary p-1 text-white border-0" onClick={jobSubmit}>Submit</button>
                 </div>
 
-              </div>
-            </Tab>
-            <Tab eventKey="content-tab" title="CTC DETAILS">
-              <div className="row justify-content-center pt-5">
-                <div className="col-md-2 d-grid">
-                  <label>CTC:</label>
-                  <label>Basic Salary: </label>
-                  <label>Travel Allowance: </label>
-                  <label>Food Allowance: </label>
-                  <label>PF: </label>
-                  <label>ESI: </label>
-                  <label>Overall Salary: </label>
-                </div>
-                <div className="col-md-2 d-grid">
-                  <input type="text"></input>
-                  <input type="text"></input>
-                  <input type="text"></input>
-                  <input type="text"></input>
-                  <input type="text"></input>
-                  <input type="text"></input>
-                  <input type="text"></input>
-                  <input type="text"></input>
-                </div>
-              </div>
-              <div className="row text-center pt-3">
-                <Form>
-                  &nbsp;<button style={{ width: "9em" }} className="bg-primary p-1 text-white border-0">Submit</button>
-                </Form>
               </div>
             </Tab>
           </Tabs>
