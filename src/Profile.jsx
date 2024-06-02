@@ -2,7 +2,10 @@ import {useEffect,useState} from 'react'
 import Card from 'react-bootstrap/Card';
 import { Modal, Button } from 'react-bootstrap';
 
+
+
 const Profile = () =>{
+    
   const [show, setShow] = useState(false);
   const [show1, setShow1] = useState(false);
   const [show2, setShow2] = useState(false);
@@ -179,7 +182,7 @@ return(
                                   </Modal.Header>
                                   <div className='d-grid justify-content-center'>
                                   <Modal.Body className='d-grid justify-center' style={{width:'18em'}}>
-                                        <label>Id:</label>
+                                      
 
                                           <label>Name:</label>
                                           <input type="text" name="name"  value={User.name} onChange={handleChange}></input>

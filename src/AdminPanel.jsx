@@ -131,41 +131,50 @@ const handleNext1 = (event) => {
 
   const submit = () => {
     const staffData = {
-      name:staff.name,
-      email:staff.email,
-      designation:staff.designation,
-      phoneno:staff.phoneno,
-      password:staff.password,
-      address:{
-        address:staff.address,
-        location:staff.location,
-        city:staff.city,
-        state:staff.state,
-        pincode:staff.pincode,
-      },
-      bank:{
-        bank:staff.bank,
-        ifsccode:staff.ifsccode,
-        pf:staff.pf,
-        esi:staff.esi,
-        branch:staff.branch,
-        accountno:staff.accountno
+      name: staff.name,
+      email: staff.email,
+      designation: staff.designation,
+      phoneno: staff.phoneno,
+      password: staff.password,
+      address: [ // Sending addresses as an array
+        {
+          address: staff.address,
+          location: staff.location,
+          city: staff.city,
+          state: staff.state,
+          pincode: staff.pincode,
+        }
+      ],
+      bank: [
+        {
+        bank: staff.bank,
+        ifsccode: staff.ifsccode,
+        pf: staff.pf,
+        esi: staff.esi,
+        branch: staff.branch,
+        accountno: staff.accountno
       }
-    }
+    ]
+    };
+  
     fetch("http://localhost:6060/user/set", {
       method: "post",
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(staffData),
-  
     })
-      .then((res) => {
-        console.log(res);
-      })
-      .then((data) => {
-        console.log(data);
-      })
+    .then((res) => {
+      console.log(res);
+    })
+    .then((data) => {
+      console.log(data);
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+  
     console.log(staffData);
-   }  
+  }
+  
 
    const Step1 = () => {
     return <div className="row">

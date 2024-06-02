@@ -25,23 +25,23 @@ const HR = () =>{
     alert("Application sent")
   }
   let id = localStorage.getItem("id")
-  const[ctc, setCTCdata] = useState([])
+//   const[ctc, setCTCdata] = useState([])
   const[attend, setAttendData] = useState([])
 
+//   useEffect(() => {
+//     // fetch(`http://localhost:6060/ctc/get/${id}`
+//     ).then(response => response.json())
+//       .then(data => {
+
+//         console.log(data);
+//         setCTCdata(data)
+
+//       })
+
+//   }, [])
+
   useEffect(() => {
-    fetch(`http://localhost:8080/ctc/get/${id}`
-    ).then(response => response.json())
-      .then(data => {
-
-        console.log(data);
-        setCTCdata(data)
-
-      })
-
-  }, [])
-
-  useEffect(() => {
-    fetch(`http://localhost:8080/attend/get/${id}`
+    fetch("http://localhost:6060/attend/get"
     ).then(response => response.json())
       .then(data => {
 
@@ -74,13 +74,13 @@ return(
                     </Modal.Header>
                     
                     <Modal.Body>
-                            <label>Id:{ctc.salaryid}</label>
-                            <label>Basic Salary:{ctc.basic_salary}<span></span></label><br></br>
+                           
+                            {/* <label>Basic Salary:{ctc.basic_salary}<span></span></label><br></br>
                             <label>Travel Allowance:{ctc.ta}<span></span></label><br></br>
                             <label>Food Allowance:{ctc.fa}<span></span></label><br></br>
                             <label>PF:{ctc.pf}<span></span></label><br></br>
                             <label>ESI:{ctc.esi}<span></span></label><br></br><hr></hr>
-                            <label>Overall Salary:{ctc.overall_salary}<span></span></label>
+                            <label>Overall Salary:{ctc.overall_salary}<span></span></label> */}
                     </Modal.Body>
                     <Modal.Footer>
                     <Button className='bg-primary p-2 rounded-2 border-0 text-white' onClick={handleClose}>
@@ -106,7 +106,7 @@ return(
                         </Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        <label>Id:{attend.attendid}</label>
+                      
                             <label>No.of Working days:{attend.workingdays}<span></span></label><br></br>
                             <label>No.of Holidays:{attend.holidays}<span></span></label><br></br>
                             <label>No.of Present:{attend.present}<span></span></label><br></br>
