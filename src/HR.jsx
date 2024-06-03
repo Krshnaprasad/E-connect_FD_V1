@@ -24,28 +24,20 @@ const HR = () =>{
   const sub = () =>{
     alert("Application sent")
   }
-  let id = localStorage.getItem("id")
-//   const[ctc, setCTCdata] = useState([])
+//   let id = localStorage.getItem("id")
+
   const[attend, setAttendData] = useState([])
 
-//   useEffect(() => {
-//     // fetch(`http://localhost:6060/ctc/get/${id}`
-//     ).then(response => response.json())
-//       .then(data => {
 
-//         console.log(data);
-//         setCTCdata(data)
-
-//       })
-
-//   }, [])
 
   useEffect(() => {
-    fetch("http://localhost:6060/attend/get"
-    ).then(response => response.json())
+    fetch("http://localhost:6060/attend/get", {
+
+      })
+      .then(response => response.json())
       .then(data => {
 
-        console.log(data);
+        console.log("================================= attend data =====" + data);
         setAttendData(data)
 
       })
@@ -75,12 +67,12 @@ return(
                     
                     <Modal.Body>
                            
-                            {/* <label>Basic Salary:{ctc.basic_salary}<span></span></label><br></br>
-                            <label>Travel Allowance:{ctc.ta}<span></span></label><br></br>
-                            <label>Food Allowance:{ctc.fa}<span></span></label><br></br>
-                            <label>PF:{ctc.pf}<span></span></label><br></br>
-                            <label>ESI:{ctc.esi}<span></span></label><br></br><hr></hr>
-                            <label>Overall Salary:{ctc.overall_salary}<span></span></label> */}
+                             <label>Basic Salary:{attend.basic_salary}<span></span></label><br></br>
+                            <label>Travel Allowance:{attend.ta}<span></span></label><br></br>
+                            <label>Food Allowance:{attend.fa}<span></span></label><br></br>
+                            <label>PF:{attend.pf}<span></span></label><br></br>
+                            <label>ESI:{attend.esi}<span></span></label><br></br><hr></hr>
+                            <label>Overall Salary:{attend.overall_salary}<span></span></label> 
                     </Modal.Body>
                     <Modal.Footer>
                     <Button className='bg-primary p-2 rounded-2 border-0 text-white' onClick={handleClose}>
