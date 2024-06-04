@@ -37,7 +37,7 @@ const HR = () =>{
       .then(response => response.json())
       .then(data => {
 
-        console.log("================================= attend data =====" + data);
+        // console.log("================================= attend data =====" + data);
         setAttendData(data)
 
       })
