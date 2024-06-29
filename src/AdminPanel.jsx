@@ -266,6 +266,7 @@ const[attendctc, setAttendData] = useState({
 })
 
 const handletabChange = (event) => {
+  event.preventDefault();
   const{name, value} = event.target;
   setAttendData({...attendctc, [name]:value})
   console.log(name,value);
@@ -334,7 +335,8 @@ const [tabStep, setTabStep] = useState(1);
     </div>;
   };
 
-  const sub = () => {
+  const sub = (event) => {
+    event.preventDefault()
     const attendData = {
      workingdays:attendctc.workingdays,
      holidays:attendctc.holidays,
@@ -448,7 +450,7 @@ const [tabStep, setTabStep] = useState(1);
                   {Array.isArray(Employees) && Employees.map((employ) => (
   <tbody key={employ.id}>
     <tr>
-      <td>{employ.id}</td>
+      <td>{employ.userid}</td>
       <td>{employ.name}</td>
       <td>{employ.email}</td>
       <td>{employ.designation}</td>
@@ -468,7 +470,6 @@ const [tabStep, setTabStep] = useState(1);
           <Modal.Body>
             <div className="row justify-content-center">
               <div className="col">
-                <label>Id:</label><br />
                 <label>Name: </label><br />
                 <label>Email: </label><br />
                 <label>Mobile: </label><br />
@@ -476,12 +477,11 @@ const [tabStep, setTabStep] = useState(1);
                 <label>Password:</label>
               </div>
               <div className="col">
-                <input type="text" name="userid" value={User.userid} onChange={handleChangeupd} />
-                <input type="text" name="name" value={User.name} onChange={handleChangeupd} />
-                <input type="text" name="email" value={User.email} onChange={handleChangeupd} />
-                <input type="text" name="phoneno" value={User.phoneno} onChange={handleChangeupd} />
-                <input type="text" name="designation" value={User.designation} onChange={handleChangeupd} />
-                <input type="text" name="password" value={User.password} onChange={handleChangeupd} />
+                <input type="text" name="name" value={employ.name} onChange={handleChangeupd} />
+                <input type="text" name="email" value={employ.email} onChange={handleChangeupd} />
+                <input type="text" name="phoneno" value={employ.phoneno} onChange={handleChangeupd} />
+                <input type="text" name="designation" value={employ.designation} onChange={handleChangeupd} />
+                <input type="text" name="password" value={employ.password} onChange={handleChangeupd} />
               </div>
             </div>
           </Modal.Body>
