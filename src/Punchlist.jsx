@@ -1,15 +1,14 @@
-import React from 'react'
+
 import Table from 'react-bootstrap/Table';
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
+
 
 const Punchlist = () =>{
 
 return(
     <>
-    <div class="container-fluid project pt-5 pb-5">
-    <div class="container">
-        <div class="row text-center">
+    <div className="container-fluid project pt-5 pb-5">
+    <div className="container">
+        <div className="row text-center">
             <span className="fs-1 fw-bold pb-3">Punchlist</span>
             <Table striped bordered hover>
       <thead>
