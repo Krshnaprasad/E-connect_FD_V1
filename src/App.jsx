@@ -1,8 +1,3 @@
-import React from 'react'
-
-
-
-
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 // import Home from '../src/Home.jsx'
 // import Register from '../src/Register.jsx'
@@ -16,7 +11,11 @@ import Request from '../src/Request.jsx'
 import Notification from '../src/Notification.jsx'
 import './App.css'
 import './index.css'
-import AdminPanel from '../src/AdminPanel.jsx';
+import AdminPanel from './Admin/AdminPanel.jsx';
+import EmployeeDetails from './Admin/EmployeeDetails.jsx'
+import AttendanceDetails from './Admin/AttendanceDetails.jsx';
+import SalaryDetails from './Admin/SalaryDetails.jsx';
+import VaccantDetails from './Admin/VaccantDetails.jsx';
 
 
 
@@ -38,7 +37,10 @@ function App() {
         <Route path ='/punch' element ={<Punchlist/>}/>
         <Route path ='/not' element={<Notification/>}/>
         <Route path ='/admin' element={<AdminPanel/>}/>
-    
+        <Route path ='/admin/employ' element={<EmployeeDetails/>}/>
+        <Route path ='/admin/attend' element={<AttendanceDetails/>}/>
+        <Route path ='/admin/ctc' element={<SalaryDetails/>}/>
+        <Route path ='/admin/vaccant' element={<VaccantDetails/>}/>
       </Routes>
       </BrowserRouter>
      
