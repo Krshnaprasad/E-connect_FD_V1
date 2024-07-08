@@ -50,30 +50,27 @@ const VaccantDetails = () =>{
 
 return(
 <>
-<div className="row justify-content-center pt-5">
-                <div className="col-md-2 d-grid">
-                  <label>Manager: </label>
-                  <label>Team Lead: </label>
-                  <label>Senior Developer: </label>
-                  <label>Junior Developer: </label>
-                  <label>FrontEnd Developer: </label>
-                  <label>BackEnd Developer: </label>
-                  <label>Training Tutors: </label>
+<div className="container-fluid">
+    <div className="container mt-5  text-center d-flex justify-content-center">
+    <div className="row pt-5 card mincard" style={{ width:"350px"}}>
+                <div className="col" style={{lineHeight:"20px"}}>
+                <label className="fs-4 fw-bolder text-white">Careers</label><br></br><br></br>
+                  <input type="text" placeholder='No.of Managers' name="manager" value={job.value} onChange={handleChange1}></input><br></br><br></br>
+                  <input type="text" placeholder='No.of Team Lead' name="team_lead"      value={job.value} onChange={handleChange1}></input><br></br><br></br>
+                  <input type="text" placeholder='No.of Senior Developers' name="senior_developer" value={job.value} onChange={handleChange1}></input><br></br><br></br>
+                  <input type="text" placeholder='No.of Junior Developers' name="junior_developer" value={job.value} onChange={handleChange1}></input><br></br><br></br>
+                  <input type="text" placeholder='No.of Frontend Developers' name="frontend_developer" value={job.value} onChange={handleChange1}></input><br></br><br></br>
+                  <input type="text" placeholder='No.of Backend Developers' name="backend_developer" value={job.value} onChange={handleChange1}></input><br></br><br></br>
+                  <input type="text" placeholder='No.of Training Tutors' name="training_tutors" value={job.value} onChange={handleChange1}></input>
                 </div>
-                <div className="col-md-2 d-grid">
-                  <input type="text" name="manager" value={job.value} onChange={handleChange1}></input>
-                  <input type="text" name="team_lead"      value={job.value} onChange={handleChange1}></input>
-                  <input type="text" name="senior_developer" value={job.value} onChange={handleChange1}></input>
-                  <input type="text" name="junior_developer" value={job.value} onChange={handleChange1}></input>
-                  <input type="text" name="frontend_developer" value={job.value} onChange={handleChange1}></input>
-                  <input type="text" name="backend_developer" value={job.value} onChange={handleChange1}></input>
-                  <input type="text" name="training_tutors" value={job.value} onChange={handleChange1}></input>
-                </div>
-                <div className='text-center pt-5'>
-                <button style={{ width: "9em" }} className="bg-primary p-1 text-white border-0" onClick={jobSubmit}>Submit</button>
+                <div className='text-center pt-5 pb-5'>
+                <button style={{ width: "9em" }} className="butn p-1 text-white border-0" onClick={jobSubmit}>Submit</button>
                 </div>
 
               </div>
+    </div>
+</div>
+
 
 
 </>

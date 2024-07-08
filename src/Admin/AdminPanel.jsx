@@ -1,6 +1,4 @@
 import{ useState } from 'react'
-import Tab from 'react-bootstrap/Tab';
-import Tabs from 'react-bootstrap/Tabs';
 
 
 
@@ -8,7 +6,6 @@ const AdminPanel = () => {
  
   
     // --------ADD EMPLOYEE TABLE -----------------------------------
-  const [activeStep, setActiveStep] = useState(1);
   const [staff, setStaffData] = useState({
     name: '',
     email: '',
@@ -187,33 +184,7 @@ const handleNext1 = (event) => {
       </div>
       <div className="container-fluid">
         <div className="container">
-          <Tabs
-            defaultActiveKey="profile"
-            id="fill-tab-example"
-            className="mb-3"
-            fill
-          >
-   
-            <Tab eventKey="add" title="ADD EMPLOYEES">
-
-              <div className="container">
-              <div className="row d-flex justify-content-center">
-              
-                <div className="col-md-4 pt-5 d-grid justify-content-center">
-                  {activeStep === 1 && <Step1 />}
-                  {activeStep === 2 && <Step2 />}
-                  {activeStep === 3 && <Step3 />}
-                </div>
-              </div>
-            </div>
-            </Tab>
-            <Tab eventKey="ctc" title="ATTENDANCE/SALARY DETAILS">
-             
-            </Tab>
-            <Tab eventKey="vaccant" title="JOB OPENINGS">
-             
-            </Tab>
-          </Tabs>
+         
         </div>
       </div>
 

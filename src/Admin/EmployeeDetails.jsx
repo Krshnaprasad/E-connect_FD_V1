@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import Table from 'react-bootstrap/Table';
-import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 
 
@@ -85,7 +84,9 @@ const EmployeeDetails = () =>{
 return(
     <>
     <div className="container-fluid">
-    <Table striped bordered hover>
+        <div className="container pt-5 pb-5">
+            <label className="fs-2 fw-bolder pt-2 pb-3">Employee Details</label>
+        <Table striped bordered hover>
         <thead>
             <tr className='text-center'>
                 <th>ID</th>
@@ -136,12 +137,12 @@ return(
                                 </div>
                             </Modal.Body>
                             <Modal.Footer>
-                                <Button variant="secondary" onClick={handleClose}>
+                                <button className="bg-secondary p-2 text-white border-0 rounded" onClick={handleClose}>
                                     Close
-                                </Button>
-                                <Button variant="primary" onClick={handleUpdate}>
+                                </button>
+                                <button className='bg-primary p-2 text-white border-0 rounded'  onClick={handleUpdate}>
                                     Save Changes
-                                </Button>
+                                </button>
                             </Modal.Footer>
                         </Modal>
                         <button className='border-0' onClick={() => handleDelete(employ.id)}>
@@ -155,6 +156,8 @@ return(
         ))}
 
     </Table>
+        </div>
+    
 </div>
     
     
