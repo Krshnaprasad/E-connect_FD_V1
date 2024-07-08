@@ -1,7 +1,6 @@
 import { useState } from 'react'
 
 
-
 const AdminPanel = () => {
 
 
@@ -101,35 +100,37 @@ const AdminPanel = () => {
         </div>
       </div>
       <div className="container-fluid">
-        <div className="container card">
+        <div className="container card mincard">
           <div className="row text-center pt-5">
-            <div className="col-lg-4" style={{lineHeight:"20px"}}>
+          <label className="fs-4 fw-bolder text-white">ADD EMPLOYEES</label><br></br><br></br>
+            <div className="col-lg-4 pt-3" style={{lineHeight:"20px"}}>
+           
               <input type="text" placeholder='Enter your name' name="name" value={staff.name} onChange={handleChange}></input><br></br><br></br>
               <input type="text" placeholder='Enter your email' name="email" value={staff.email} onChange={handleChange}></input><br></br><br></br>
               <input type="text" placeholder='Enter your mobile' name="phoneno" value={staff.phoneno} onChange={handleChange}></input><br></br><br></br>
               <input type="text" placeholder='Designation' name="designation" value={staff.designation} onChange={handleChange}></input><br></br><br></br>
-              <input type="text" placeholder='Set Password' name="password" value={staff.password} onChange={handleChange}></input>
+              <input type="text" placeholder='Set Password' name="password" value={staff.password} onChange={handleChange}></input><br></br><br></br>
             </div>
-            <div className="col-lg-4" style={{lineHeight:"20px"}}>
+            <div className="col-lg-4 pt-3" style={{lineHeight:"20px"}}>
               <input type="text" placeholder='Enter your address' name="address" value={staff.address} onChange={handleChange}></input><br></br><br></br>
               <input type="text" placeholder='Enter your location' name="location" value={staff.location} onChange={handleChange}></input><br></br><br></br>
               <input type="text" placeholder='Enter your city' name="city" value={staff.city} onChange={handleChange}></input><br></br><br></br>
               <input type="text" placeholder='Enter your state' name="state" value={staff.state} onChange={handleChange}></input><br></br><br></br>
-              <input type="text" placeholder='Enter your pincode' name="pincode" value={staff.pincode} onChange={handleChange}></input>
+              <input type="text" placeholder='Enter your pincode' name="pincode" value={staff.pincode} onChange={handleChange}></input><br></br><br></br>
             </div>
-            <div className="col" style={{lineHeight:"20px"}}>
-              <input type="text" name="bank" value={staff.bank} onChange={handleChange}></input><br></br><br></br>
-              <input type="text" name="accountno" value={staff.accountno} onChange={handleChange}></input><br></br><br></br>
-              <input type="text" name="ifsccode" value={staff.ifsccode} onChange={handleChange}></input><br></br><br></br>
-              <input type="text" name="branch" value={staff.branch} onChange={handleChange}></input><br></br><br></br>
-              <input type="text" name="pf" value={staff.pf} onChange={handleChange}></input><br></br><br></br>
-              <input type="text" name="esi" value={staff.esi} onChange={handleChange}></input>
+            <div className="col-lg-4" style={{lineHeight:"20px"}}>
+              <input type="text" placeholder='Enter your bank' name="bank" value={staff.bank} onChange={handleChange}></input><br></br><br></br>
+              <input type="text" placeholder='Enter your AccountNo' name="accountno" value={staff.accountno} onChange={handleChange}></input><br></br><br></br>
+              <input type="text" placeholder='Enter your IFSC code' name="ifsccode" value={staff.ifsccode} onChange={handleChange}></input><br></br><br></br>
+              <input type="text" placeholder='Enter your branch' name="branch" value={staff.branch} onChange={handleChange}></input><br></br><br></br>
+              <input type="text" placeholder='PF' name="pf" value={staff.pf} onChange={handleChange}></input><br></br><br></br>
+              <input type="text" placeholder='ESI' name="esi" value={staff.esi} onChange={handleChange}></input>
             </div>
           </div>
-
+          <button className="p-2 butn mt-3 mb-3 fw-semibold text-white" onClick={submit}>Submit</button>
         </div>
       </div>
-<button onClick={submit}>SUbmit</button>
+
 
     </>
   )
