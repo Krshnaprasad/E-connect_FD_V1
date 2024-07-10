@@ -102,7 +102,7 @@ const AdminPanel = () => {
       <div className="container-fluid">
         <div className="container card mincard">
           <div className="row text-center pt-5">
-          <label className="fs-4 fw-bolder text-white">ADD EMPLOYEES</label><br></br><br></br>
+          <label className="fs-4 fw-bolder text-white">ADD USERS</label><br></br><br></br>
             <div className="col-lg-4 pt-3" style={{lineHeight:"20px"}}>
            
               <input type="text" placeholder='Enter your name' name="name" value={staff.name} onChange={handleChange}></input><br></br><br></br>
