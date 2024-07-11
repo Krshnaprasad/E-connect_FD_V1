@@ -1,5 +1,5 @@
 import { useState } from 'react'
-
+import Nav from 'react-bootstrap/Nav';
 
 const AdminPanel = () => {
 
@@ -92,14 +92,35 @@ const AdminPanel = () => {
   //---------ACTUAL CODE---------------------------------------------------------->
   return (
     <>
-      <div className="container-fluid pt-5">
+      <div className="container-fluid pt-3">
         <div className="container">
-          <div className="text-center fs-2 fw-bold">
+          <div className="text-center fs-3 fw-bold">
             <p>ADMIN DASHBOARD</p>
           </div>
         </div>
       </div>
       <div className="container-fluid">
+        <div className="container">
+        <Nav fill variant="tabs">
+      <Nav.Item>
+        <Nav.Link href="/admin/employ">Employees</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link href="/admin">Add Employees</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link href="/admin/attend">Attendance</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link href="/admin/ctc" >Salary</Nav.Link>
+      </Nav.Item>
+      <Nav.Item>
+        <Nav.Link href="admin/vaccant" >Job openings</Nav.Link>
+      </Nav.Item>
+    </Nav>
+        </div>
+      </div>
+      <div className="container-fluid pt-3">
         <div className="container card mincard">
           <div className="row text-center pt-5">
           <label className="fs-4 fw-bolder text-white">ADD USERS</label><br></br><br></br>
