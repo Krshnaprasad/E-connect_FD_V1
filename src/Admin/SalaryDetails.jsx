@@ -21,8 +21,8 @@ const SalaryDetails = () =>{
         console.log(name,value);
       }
       
-      const sub = (event) => {
-        event.preventDefault()
+      const sub = () => {
+        const userId = localStorage.getItem("userId");
         const ctcData = {
           ctc:ctc.ctc,
           basic_salary:ctc.basic_salary,
@@ -34,7 +34,7 @@ const SalaryDetails = () =>{
          }
          
         
-        fetch("", {
+        fetch(`http://localhost:6060/salary/set/${userId}`, {
           method: "post",
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(ctcData),
@@ -46,7 +46,7 @@ const SalaryDetails = () =>{
           .then((data) => {
             console.log(data);
           })
-        console.log(ctcData);
+        
       }
 
 return(

@@ -11,6 +11,7 @@ const AdminPanel = () => {
     designation: '',
     phoneno: '',
     password: '',
+    confirmpassword:'',
     address: '',
     city: '',
     state: '',
@@ -25,6 +26,7 @@ const AdminPanel = () => {
 
   })
 
+ 
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -39,16 +41,72 @@ const AdminPanel = () => {
       designation: staff.designation,
       phoneno: staff.phoneno,
       password: staff.password,
-      address: [ // Sending addresses as an array
-        {
-          address: staff.address,
-          location: staff.location,
-          city: staff.city,
-          state: staff.state,
-          pincode: staff.pincode,
-        }
-      ],
-      bank: [
+      confirmpassword:staff.confirmpassword,
+      
+    };
+
+  
+      
+
+    fetch("http://localhost:6060/user/set", {
+      method: "post",
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(staffData),
+    })
+      .then(res => 
+        res.json()
+      )
+      .then(data => {
+        console.log(data);
+        const userId = data.userid
+        localStorage.setItem("userId",userId)
+        AddressSend(userId);
+        BankSend(userId);
+        // window.location.reload()
+
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+
+
+    console.log(staffData);
+  
+  }
+
+function AddressSend (userId){
+  let address= // Sending addresses as an array
+  {
+    user_id:userId,
+    address: staff.address,
+    location: staff.location,
+    city: staff.city,
+    state: staff.state,
+    pincode: staff.pincode,
+  }
+
+  fetch(`http://localhost:6060/address/set/${userId}`, {
+    method: "post",
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(address),
+  })
+    .then((res) => {
+      console.log(res.json());
+    })
+    .then((data) => {
+      console.log(data);
+      // window.location.reload()
+
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+
+}
+
+function BankSend (userId){
+ // 
+      let bank =
         {
           bank: staff.bank,
           ifsccode: staff.ifsccode,
@@ -57,26 +115,26 @@ const AdminPanel = () => {
           branch: staff.branch,
           accountno: staff.accountno
         }
-      ]
-    };
+      
 
-    fetch("http://localhost:6060/user/set", {
-      method: "post",
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(staffData),
+  fetch(`http://localhost:6060/bank/set/${userId}`, {
+    method: "post",
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(bank),
+  })
+    .then((res) => {
+      console.log(res.json());
     })
-      .then((res) => {
-        console.log(res);
-      })
-      .then((data) => {
-        console.log(data);
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-      });
+    .then((data) => {
+      console.log(data);
+      // window.location.reload()
 
-    console.log(staffData);
-  }
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+    });
+
+}
 
 
 
@@ -131,16 +189,17 @@ const AdminPanel = () => {
               <input type="text" placeholder='Enter your mobile' name="phoneno" value={staff.phoneno} onChange={handleChange}></input><br></br><br></br>
               <input type="text" placeholder='Designation' name="designation" value={staff.designation} onChange={handleChange}></input><br></br><br></br>
               <input type="text" placeholder='Set Password' name="password" value={staff.password} onChange={handleChange}></input><br></br><br></br>
+              <input type="text" placeholder='Confirm Password' name="confirmpassword" value={staff.confirmpassword} onChange={handleChange}></input><br></br><br></br>
             </div>
-            <div className="col-lg-4 pt-3" style={{lineHeight:"20px"}}>
+            <div className="col-lg-4 pt-4" style={{lineHeight:"20px"}}>
               <input type="text" placeholder='Enter your address' name="address" value={staff.address} onChange={handleChange}></input><br></br><br></br>
               <input type="text" placeholder='Enter your location' name="location" value={staff.location} onChange={handleChange}></input><br></br><br></br>
               <input type="text" placeholder='Enter your city' name="city" value={staff.city} onChange={handleChange}></input><br></br><br></br>
               <input type="text" placeholder='Enter your state' name="state" value={staff.state} onChange={handleChange}></input><br></br><br></br>
               <input type="text" placeholder='Enter your pincode' name="pincode" value={staff.pincode} onChange={handleChange}></input><br></br><br></br>
             </div>
-            <div className="col-lg-4" style={{lineHeight:"20px"}}>
-              <input type="text" placeholder='Enter your bank' name="bank" value={staff.bank} onChange={handleChange}></input><br></br><br></br>
+            <div className="col-lg-4 pt-3" style={{lineHeight:"20px"}}>
+              <input type="text" placeholder='Enter your Bank' name="bank" value={staff.bank} onChange={handleChange}></input><br></br><br></br>
               <input type="text" placeholder='Enter your AccountNo' name="accountno" value={staff.accountno} onChange={handleChange}></input><br></br><br></br>
               <input type="text" placeholder='Enter your IFSC code' name="ifsccode" value={staff.ifsccode} onChange={handleChange}></input><br></br><br></br>
               <input type="text" placeholder='Enter your branch' name="branch" value={staff.branch} onChange={handleChange}></input><br></br><br></br>

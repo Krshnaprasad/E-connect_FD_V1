@@ -4,6 +4,7 @@ import{ useState } from 'react'
 const AttendanceDetails = () => {
    
     const[attend, setAttendData] = useState({
+      
         workingdays:'',
         holidays:'',
         present:'',
@@ -17,13 +18,15 @@ const AttendanceDetails = () => {
         const{name, value} = event.target;
         setAttendData({...attend, [name]:value})
         console.log(name,value);
+        
       }
       
      
-
-        const sub = (event) => {
-            event.preventDefault()
+     
+        const sub = () => {
+          const userId = localStorage.getItem("userId");
             const attendData = {
+            
              workingdays:attend.workingdays,
              holidays:attend.holidays,
              present:attend.present,
@@ -32,7 +35,7 @@ const AttendanceDetails = () => {
              month_salary:attend.month_salary,
              
             }
-            fetch("http://localhost:6060/attend/set", {
+            fetch(`http://localhost:6060/attend/set/${userId}`, {
               method: "post",
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify(attendData),
@@ -43,8 +46,9 @@ const AttendanceDetails = () => {
               })
               .then((data) => {
                 console.log(data);
+               
+                
               })
-            console.log(attendData);
            }  
 
 

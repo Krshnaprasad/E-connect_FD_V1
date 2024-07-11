@@ -1,6 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 // import Home from '../src/Home.jsx'
 // import Register from '../src/Register.jsx'
+
 import Login from '../src/Login'
 import LandPage from '../src/LandPage.jsx'
 import Elearn from '../src/Elearn.jsx'
@@ -26,8 +27,14 @@ function App() {
 
      <BrowserRouter>
       <Routes>
+
+     
+
+
         {/* <Route path='/' element={<Home />}/> */}
         {/* <Route path='/reg' element={<Register/>}/> */}
+
+
         <Route path='/' element={<Login/>}/>
         <Route path ='/land' element ={<LandPage/>}/>
         <Route path ='/elearn' element ={<Elearn/>}/>
