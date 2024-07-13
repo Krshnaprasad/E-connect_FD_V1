@@ -7,7 +7,7 @@ const Punchlist = () =>{
 return(
     <>
     <div className="container-fluid project pt-5 pb-5  ">
-    <div className="container">
+    <div className="container pb-5">
         <div className="row text-center">
             <span className="fs-1 fw-bold pb-3">Punchlist</span>
             <Table striped bordered hover>
