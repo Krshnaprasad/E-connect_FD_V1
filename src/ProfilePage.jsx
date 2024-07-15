@@ -29,12 +29,13 @@ const ProfilePage = () => {
       })
       .then(response => response.json())
       .then(data => {
-          Swal.fire({
-              icon: 'success',
-              title: 'Check-in successful',
-              text: 'You have successfully checked in.',
-          });
+         
           console.log('Check-in successful:', data);
+          Swal.fire({
+            icon: 'success',
+            title: 'Check-in successful',
+            text: 'You have successfully checked in.',
+        });
       })
       .catch((error) => {
           Swal.fire({
