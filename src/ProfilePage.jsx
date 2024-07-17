@@ -5,7 +5,7 @@ const ProfilePage = () => {
 
   const [user] = [
     {
-      img: "../src/assets/user.jpg"
+      img:"../src/assets/user.jpg"
     }
   ]
 
