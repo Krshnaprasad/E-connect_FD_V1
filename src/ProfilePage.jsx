@@ -86,7 +86,7 @@ const ProfilePage = () => {
         <div className="card " style={{ width: "50em" }}>
           <div className="row g-0">
             <div className="col-md-4">
-              <img src={user.img} className="img-fluid rounded-start" alt="..."></img>
+              <img src={user.img} className="img-fluid rounded-start" alt="Img Error"></img>
             </div>
             <div className="col-md-8 d-grid align-content-center">
               <div className="card-body">
